@@ -1,10 +1,11 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 
 class Ativo(models.Model):
     nome = models.CharField(max_length=20)
     codigo = models.CharField(max_length=10, unique=True)
-    limite_inferior = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    limite_superior = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    limite_inferior = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
+    limite_superior = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     periodicidade = models.PositiveIntegerField(help_text="Periodicidade em minutos")
     
     def __str__(self):

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar ativos</title>
+</head>
+<body>
+    <h1>Ativos Monitorados</h1>
+    <ul>
+        {% for ativo in ativos %}
+        <li>{{ ativo.nome }} - {{ ativo.codigo }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'cadastrar_ativo' %}">Cadastrar Novo Ativo</a>
+</body>
+</html>
