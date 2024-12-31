@@ -7,7 +7,7 @@ class Ativo(models.Model):
     limite_inferior = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     limite_superior = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     periodicidade = models.PositiveIntegerField(help_text="Periodicidade em minutos")
-    
+    ultima_cotacao = models.FloatField(null=True, blank=True)
     def __str__(self):
         return f"{self.nome} ({self.codigo})"
     
