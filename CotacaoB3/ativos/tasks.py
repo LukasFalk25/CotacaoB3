@@ -5,6 +5,7 @@ from celery import shared_task
 from .services import salvar_cotacoes
 import logging 
 from ativos.utils import processar_alertas
+import logging
 
 @shared_task
 def tarefa_salvar_cotacoes():

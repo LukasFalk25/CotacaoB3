@@ -3,15 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listar ativos</title>
+    <title>Listar Ativos</title>
+    {% load static %}
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
 </head>
 <body>
-    <h1>Ativos Monitorados</h1>
-    <ul>
-        {% for ativo in ativos %}
-        <li>{{ ativo.nome }} - {{ ativo.codigo }}</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'cadastrar_ativo' %}">Cadastrar Novo Ativo</a>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Ativos Monitorados</h1>
+
+        <div class="row">
+            {% for ativo in ativos %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card ativo-card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ ativo.nome }} <small class="text-muted">({{ ativo.codigo }})</small></h5>
+                        <button 
+                            class="btn btn-primary btn-sm"
+                            onclick="toggleCotacao({{ ativo.id }})">
+                            Mostrar Cotações
+                        </button>
+                        
+                        <!-- Exibindo as últimas 5 cotações -->
+                        <div id="cotacao-{{ ativo.id }}" class="cotacao mt-3">
+                            {% if ativo.ultimas_cotacoes %}
+                                <ul class="list-group">
+                                    {% for cotacao in ativo.ultimas_cotacoes %}
+                                    <li class="list-group-item">
+                                        Cotação: R$ {{ cotacao.preco|floatformat:2 }} 
+                                        <br>
+                                        <small class="text-muted">Data: {{ cotacao.data_hora }}</small>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <div class="alert alert-warning mt-2" role="alert">
+                                    Cotação não disponível.
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="/ativos/cadastrar/" class="btn btn-success">Cadastrar Novo Ativo</a>
+        </div>
+    </div>
 </body>
 </html>

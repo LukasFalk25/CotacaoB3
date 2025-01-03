@@ -4,6 +4,10 @@ from .forms import FormularioAtivo
 
 def listar_ativos(request):
     ativos = Ativo.objects.all()
+    
+    for ativo in ativos:
+        ativo.ultimas_cotacoes = ativo.cotacoes.order_by('-data_hora')[:5]
+
     return render(request, 'ativos/listar_ativos.html', {'ativos': ativos})
 
 def cadastrar_ativos(request):

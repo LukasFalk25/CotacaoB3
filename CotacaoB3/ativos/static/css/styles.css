@@ -1,0 +1,17 @@
+/* Estilo para ocultar as cotações inicialmente */
+.cotacao {
+    display: none;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+/* Estilo para o card de ativo */
+.ativo-card {
+    margin-bottom: 20px;
+}
+
+/* Estilo para a lista de cotações */
+.cotacao ul {
+    padding-left: 20px;
+    margin: 10px 0;
+}

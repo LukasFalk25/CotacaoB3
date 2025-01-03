@@ -1,5 +1,5 @@
 import yfinance as yf
-from .models import Ativo
+from .models import Ativo,Cotacao
 
 def obter_e_salvar_cotacao(codigo_ativo):
     try:
@@ -12,6 +12,8 @@ def obter_e_salvar_cotacao(codigo_ativo):
             ativo_obj = Ativo.objects.get(codigo=codigo_ativo)
             ativo_obj.ultima_cotacao = cotacao
             ativo_obj.save()
+            Cotacao.objects.create(ativo=ativo_obj, preco=cotacao)
+            
             print(f"Última cotação atualizada para {codigo_ativo}: {cotacao}")
         else:
             print(f"Nenhuma cotação encontrada para o ativo {codigo_ativo}.")
